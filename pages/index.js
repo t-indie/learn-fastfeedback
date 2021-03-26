@@ -1,37 +1,29 @@
 import Head from 'next/head';
-import styles from '../styles/Home.module.css';
-import {useAuth} from '../lib/auth';
-export default function Home() {
+import {Button, Flex, Text, Code, Icon} from '@chakra-ui/react';
+
+import {useAuth} from '@/lib/auth';
+
+const Home = () => {
   const auth = useAuth();
+
   return (
-    <div className={styles.container}>
+    <Flex as="main" direction="column" align="center" justify="center" h="100vh">
       <Head>
         <title>Fast Feedback</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing <code className={styles.code}>pages/index.js</code>
-        </p>
-        <button onClick={(e) => auth.signinWithGithub()}>signin</button>
-        <div> {auth.user?.email}</div>
-        {auth?.user && <button onClick={(e) => auth.signout()}>signout</button>}
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
+      <Icon color="black" name="logo" size="64px" />
+      {auth.user ? (
+        <Button as="a" href="/dashboard">
+          View Dashboard
+        </Button>
+      ) : (
+        <Button mt={4} size="sm" onClick={(e) => auth.signinWithGithub()}>
+          Sign In
+        </Button>
+      )}
+    </Flex>
   );
-}
+};
+
+export default Home;
