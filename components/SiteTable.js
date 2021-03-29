@@ -2,8 +2,22 @@ import {Box, Link} from '@chakra-ui/react';
 import {Table, Tr, Th, Td} from './Table';
 import {parseISO, format} from 'date-fns';
 import NextLink from 'next/link';
+import {logger, formatObjectKeys} from '@/utils/logger';
 
 const SiteTable = ({sites}) => {
+  logger.error(
+    {
+      request: {
+        url: 'asdasd',
+        method: 'GET'
+      },
+      response: {
+        statusCode: 404
+      }
+    },
+    'asdasd'
+  );
+
   return (
     <Table>
       <thead>
